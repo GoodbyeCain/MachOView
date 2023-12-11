@@ -57,6 +57,13 @@ using namespace std;
 }
 
 //-----------------------------------------------------------------------------
+- (BOOL)isObject
+{
+  MATCH_STRUCT(mach_header,imageOffset);
+  return (mach_header->filetype == MH_OBJECT);
+}
+
+//-----------------------------------------------------------------------------
 - (struct section const *)getSectionByIndex:(uint32_t)index
 {
   static const struct section notfound = { "???", "?????", 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -1319,7 +1326,8 @@ struct CompareSectionByName
 -(void)processEHFrames
 {
   // dylib stubs have no section
-  if ([self isDylibStub] == YES)
+  if ([self isDylibStub] == YES ||
+      [self isObject] == YES)
   {
     return;
   }
