@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22155" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22155"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,20 +18,20 @@
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" animationBehavior="default" id="23" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="167" y="107" width="380" height="110"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1536" height="935"/>
             <view key="contentView" id="24">
                 <rect key="frame" x="0.0" y="0.0" width="380" height="110"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="iE9-IS-2YW">
                         <rect key="frame" x="18" y="54" width="232" height="18"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="230" id="DHA-hd-fpL"/>
-                        </constraints>
                         <buttonCell key="cell" type="check" title="Display open file menu at startup" bezelStyle="regularSquare" imagePosition="left" inset="2" id="rIK-aD-7Yv">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="230" id="DHA-hd-fpL"/>
+                        </constraints>
                         <connections>
                             <action selector="toggleOpenAtLaunch:" target="-2" id="DLf-up-jrL"/>
                             <binding destination="3" name="value" keyPath="values.OpenAtLaunch" id="GRV-IN-EnF"/>
@@ -39,6 +39,7 @@
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iE9-IS-2YW" secondAttribute="trailing" constant="20" symbolic="YES" id="K79-E2-3hn"/>
                     <constraint firstItem="iE9-IS-2YW" firstAttribute="top" secondItem="24" secondAttribute="top" constant="39" id="lvw-0F-Tgf"/>
                     <constraint firstItem="iE9-IS-2YW" firstAttribute="leading" secondItem="24" secondAttribute="leading" constant="20" symbolic="YES" id="twO-aq-Nrj"/>
                 </constraints>
