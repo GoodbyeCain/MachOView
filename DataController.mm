@@ -606,6 +606,10 @@ NSString * const MVStatusTaskTerminated           = @"MVStatusTaskTerminated";
   }
 }
 
+- (float)compareWithTable:(MVTable *) table {
+    return  1.0;
+}
+
 //----------------------------------------------------------------------------
 - (void) applyFilter: (NSString *)filter
 {
@@ -721,6 +725,45 @@ NSString * const MVStatusTaskTerminated           = @"MVStatusTaskTerminated";
 - (MVNode *)childAtIndex:(NSUInteger)n 
 {
   return [children objectAtIndex:n];
+}
+
+- (NSArray <MVNode *> *)allChildren
+{
+    NSMutableArray<MVNode *> *result = [NSMutableArray array];
+    [result addObject:self];
+    
+    NSMutableArray<MVNode *> *temp = [NSMutableArray array];
+    BOOL needContinue = YES;
+    while (needContinue) {
+        needContinue = NO;
+        for (MVNode *node in result) {
+            if([node numberOfChildren] > 0) {
+                needContinue = YES;
+                [temp addObjectsFromArray:node->children];
+            } else {
+                [temp addObject:node];
+            }
+        }
+        result = [temp mutableCopy];
+        [temp removeAllObjects];
+    }
+    
+    return  result;
+}
+
+- (NSArray <MVNode *> *)currChildren
+{
+    return self->children;
+}
+
+- (float)compareWithNode:(MVNode *) other {
+    if(self->children.count > 0 && other->children.count > 0) {
+        return  1.0;
+    } else {
+        [self openDetails];
+        [other openDetails];
+        return [self.details compareWithTable:other.details];
+    }
 }
 
 //----------------------------------------------------------------------------

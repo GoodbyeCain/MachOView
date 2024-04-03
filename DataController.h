@@ -107,6 +107,8 @@ struct MVNodeSaver;
 - (void)                setAttributesForRowIndex:(NSUInteger)index :(NSString *)firstArg, ... NS_REQUIRES_NIL_TERMINATION;
 - (void)                setAttributesFromRowIndex:(NSUInteger)index :(NSString *)firstArg, ... NS_REQUIRES_NIL_TERMINATION;
 
+- (float)compareWithTable:(MVTable *) table;
+
 @end
 
 //----------------------------------------------------------------------------
@@ -127,6 +129,8 @@ struct MVNodeSaver;
 @property (nonatomic)                   MVTable *             details;
 @property (nonatomic)                   NSMutableDictionary * userInfo;
 @property (nonatomic)                   off_t              detailsOffset;
+@property (nonatomic, assign)           CGFloat              similar;
+@property (nonatomic, copy)             NSString *            similarInfo;
 
 - (NSUInteger)          numberOfChildren;
 - (MVNode *)            childAtIndex:(NSUInteger)n;
@@ -139,6 +143,9 @@ struct MVNodeSaver;
 - (void)                filterDetails:(NSString *)filter;
 - (void)                loadFromFile:(FILE *)pFile;
 - (void)                saveToFile:(FILE *)pFile;
+- (NSArray <MVNode *> *)allChildren;
+- (NSArray <MVNode *> *)currChildren;
+- (float)compareWithNode:(MVNode *) other;
 
 @end
 

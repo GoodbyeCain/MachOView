@@ -6,6 +6,7 @@
  *
  */
 
+#import <AppKit/AppKit.h>
 #include <atomic>
 
 @class MVDataController;

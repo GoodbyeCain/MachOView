@@ -14,6 +14,8 @@
 #import "Attach.h"
 #import <mach-o/fat.h>
 #import <mach-o/loader.h>
+#import "NSAlert+Helper.h"
+#import "CompareWindowController.h"
 
 // counters for statistics
 int64_t nrow_total;  // number of rows (loaded and empty)
@@ -189,6 +191,19 @@ int64_t nrow_loaded; // number of loaded rows
        [self application:NSApp openFile:[url path]];
      }
    }];
+}
+
+- (IBAction)compareDocument:(id)sender
+{
+    NSArray *allDocuments = [[NSDocumentController sharedDocumentController] documents]; // 获取所有打开的文档
+//    if(allDocuments.count != 2) {
+//        [NSAlert runModalWithMessage:@"Please select two file for compare"];
+//    }
+    
+    compareController = [[CompareWindowController alloc] init];
+    compareController.leftDocument = allDocuments.firstObject;
+    compareController.rightDocument = allDocuments.lastObject;
+    [compareController showWindow:self];
 }
 
 //----------------------------------------------------------------------------

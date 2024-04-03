@@ -9,10 +9,12 @@
 #import <Cocoa/Cocoa.h>
 
 @class MVPreferenceController;
+@class CompareWindowController;
 
 @interface MVAppController : NSObject <NSApplicationDelegate,NSOpenSavePanelDelegate>
 {
   MVPreferenceController * preferenceController;
+  CompareWindowController * compareController;
 }
 
 - (IBAction)showPreferencePanel:(id)sender;
