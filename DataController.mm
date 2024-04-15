@@ -606,10 +606,6 @@ NSString * const MVStatusTaskTerminated           = @"MVStatusTaskTerminated";
   }
 }
 
-- (float)compareWithTable:(MVTable *) table {
-    return  1.0;
-}
-
 //----------------------------------------------------------------------------
 - (void) applyFilter: (NSString *)filter
 {
@@ -754,16 +750,6 @@ NSString * const MVStatusTaskTerminated           = @"MVStatusTaskTerminated";
 - (NSArray <MVNode *> *)currChildren
 {
     return self->children;
-}
-
-- (float)compareWithNode:(MVNode *) other {
-    if(self->children.count > 0 && other->children.count > 0) {
-        return  1.0;
-    } else {
-        [self openDetails];
-        [other openDetails];
-        return [self.details compareWithTable:other.details];
-    }
 }
 
 //----------------------------------------------------------------------------

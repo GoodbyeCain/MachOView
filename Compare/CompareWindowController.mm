@@ -9,6 +9,8 @@
 #import "Document.h"
 #import "CompareDataSource.h"
 #import "DataController.h"
+#import "MVNode+Compare.h"
+#import "CompareModel.h"
 
 @interface CompareWindowController ()
 @property (nonatomic, strong) CompareDataSource *leftDataSource;
@@ -21,13 +23,15 @@
 
 @implementation CompareWindowController
 
-- (instancetype)init {
+- (instancetype)init 
+{
     self = [super initWithWindowNibName:@"CompareWindowController"];
     self.compareThread = [[NSThread alloc] initWithTarget:self selector:@selector(doCompare) object:nil];
     return self;
 }
 
-- (void)windowDidLoad {
+- (void)windowDidLoad 
+{
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
@@ -47,26 +51,35 @@
     [_compareThread start];
 }
 
-- (void)doCompare {
+- (void)doCompare 
+{
     NSArray <MVNode *>* leftNodes = [_leftDocument.dataController.rootNode currChildren];
-    NSArray <MVNode *>* rightNodes = [_leftDocument.dataController.rootNode currChildren];
+    NSArray <MVNode *>* rightNodes = [_rightDocument.dataController.rootNode currChildren];
+    NSMutableArray <CompareModel *>*resultList = [NSMutableArray array];
     
-    for (NSUInteger lIndex = 0; lIndex < leftNodes.count; lIndex ++) {
+    for (NSUInteger lIndex = 0; lIndex < leftNodes.count; lIndex ++) 
+    {
         MVNode *leftNode = leftNodes[lIndex];
-        for(NSUInteger rIndex = 0; rIndex < rightNodes.count; rIndex ++) {
-            MVNode *rightNode = leftNodes[rIndex];
+        for(NSUInteger rIndex = 0; rIndex < rightNodes.count; rIndex ++) 
+        {
+            MVNode *rightNode = rightNodes[rIndex];
             if([leftNode.caption isEqualToString:rightNode.caption]) {
-                [leftNode openDetails];
-                [rightNode openDetails];
-                
-                float similar = [leftNode compareWithNode:rightNode];
-                leftNode.similar = similar;
-                leftNode.similarInfo = [NSString stringWithFormat:@"%.1f", similar];
+                CompareModel *result = [leftNode compareWithNode:rightNode];
+                if(result.compared) 
+                {
+                    [resultList addObject:result];
+                }
+
                 break;
             }
         }
         
         NSLog(@"Compare percent: %f", (float)(lIndex + 1) / leftNodes.count);
+    }
+    
+    NSLog(@"Summary compare result");
+    for (CompareModel *result in resultList) {
+        NSLog(@"\t%@", result);
     }
     
 //    for (NSUInteger i = 0; i < leftNodes.count; i ++) {

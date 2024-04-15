@@ -26,6 +26,9 @@
 		201B4C3A2BBD4C57009F8B37 /* CompareWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 201B4C382BBD4C57009F8B37 /* CompareWindowController.mm */; };
 		201B4C3B2BBD4C57009F8B37 /* CompareWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 201B4C392BBD4C57009F8B37 /* CompareWindowController.xib */; };
 		201B4C3F2BBD5C33009F8B37 /* CompareDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = 201B4C3E2BBD5C33009F8B37 /* CompareDataSource.mm */; };
+		20516D5C2BCCCE20007B4E9E /* MVNode+Compare.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20516D5B2BCCCE20007B4E9E /* MVNode+Compare.mm */; };
+		20516D5F2BCCCF2A007B4E9E /* MVTable+Compare.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20516D5E2BCCCF2A007B4E9E /* MVTable+Compare.mm */; };
+		20516D622BCD1F7A007B4E9E /* CompareModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20516D612BCD1F7A007B4E9E /* CompareModel.mm */; };
 		256AC3DA0F4B6AC300CF3369 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* AppController.mm */; };
 		3C0ADEB0169CD42600DA428E /* README.md in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3CE90DFC11F6107600543402 /* README.md */; };
 		3C0F958411F6589D0070A2FE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C0F957E11F6589D0070A2FE /* InfoPlist.strings */; };
@@ -92,6 +95,12 @@
 		201B4C392BBD4C57009F8B37 /* CompareWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompareWindowController.xib; sourceTree = "<group>"; };
 		201B4C3D2BBD5C33009F8B37 /* CompareDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompareDataSource.h; sourceTree = "<group>"; };
 		201B4C3E2BBD5C33009F8B37 /* CompareDataSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CompareDataSource.mm; sourceTree = "<group>"; };
+		20516D5A2BCCCE20007B4E9E /* MVNode+Compare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MVNode+Compare.h"; sourceTree = "<group>"; };
+		20516D5B2BCCCE20007B4E9E /* MVNode+Compare.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "MVNode+Compare.mm"; sourceTree = "<group>"; };
+		20516D5D2BCCCF2A007B4E9E /* MVTable+Compare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MVTable+Compare.h"; sourceTree = "<group>"; };
+		20516D5E2BCCCF2A007B4E9E /* MVTable+Compare.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "MVTable+Compare.mm"; sourceTree = "<group>"; };
+		20516D602BCD1F7A007B4E9E /* CompareModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompareModel.h; sourceTree = "<group>"; };
+		20516D612BCD1F7A007B4E9E /* CompareModel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CompareModel.mm; sourceTree = "<group>"; };
 		256AC3D80F4B6AC300CF3369 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		256AC3D90F4B6AC300CF3369 /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
 		256AC3F00F4B6AF500CF3369 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
@@ -241,6 +250,8 @@
 			children = (
 				201B4C3D2BBD5C33009F8B37 /* CompareDataSource.h */,
 				201B4C3E2BBD5C33009F8B37 /* CompareDataSource.mm */,
+				20516D602BCD1F7A007B4E9E /* CompareModel.h */,
+				20516D612BCD1F7A007B4E9E /* CompareModel.mm */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -248,6 +259,7 @@
 		20310F552BBD46B50038660A /* Compare */ = {
 			isa = PBXGroup;
 			children = (
+				20516D592BCCCCB9007B4E9E /* Extension */,
 				201B4C3C2BBD5C24009F8B37 /* Model */,
 				201B4C372BBD4C57009F8B37 /* CompareWindowController.h */,
 				201B4C382BBD4C57009F8B37 /* CompareWindowController.mm */,
@@ -263,6 +275,17 @@
 				201B4C292BBD48A4009F8B37 /* NSAlert+Helper.m */,
 				201B4C252BBD47B5009F8B37 /* NSDocumentController+Helper.h */,
 				201B4C262BBD47B5009F8B37 /* NSDocumentController+Helper.m */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		20516D592BCCCCB9007B4E9E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				20516D5A2BCCCE20007B4E9E /* MVNode+Compare.h */,
+				20516D5B2BCCCE20007B4E9E /* MVNode+Compare.mm */,
+				20516D5D2BCCCF2A007B4E9E /* MVTable+Compare.h */,
+				20516D5E2BCCCF2A007B4E9E /* MVTable+Compare.mm */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -449,6 +472,7 @@
 				8D11072D0486CEB800E47090 /* main.mm in Sources */,
 				256AC3DA0F4B6AC300CF3369 /* AppController.mm in Sources */,
 				3CF9779E11C77A23004CD74C /* DataController.mm in Sources */,
+				20516D622BCD1F7A007B4E9E /* CompareModel.mm in Sources */,
 				3CF978C611C7B34C004CD74C /* DataSources.mm in Sources */,
 				3CF97F0F11C91F93004CD74C /* MachOLayout.mm in Sources */,
 				3C73525A11DE122900DF1950 /* Document.mm in Sources */,
@@ -468,6 +492,8 @@
 				3CE7199F1333A4EF0005C4DA /* Layout.mm in Sources */,
 				3CF22E92144C8FC600380071 /* ObjC.mm in Sources */,
 				3C34A82B14892FF1005B53F6 /* FatLayout.mm in Sources */,
+				20516D5C2BCCCE20007B4E9E /* MVNode+Compare.mm in Sources */,
+				20516D5F2BCCCF2A007B4E9E /* MVTable+Compare.mm in Sources */,
 				3C46C7D91687C6ED00212190 /* PreferenceController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

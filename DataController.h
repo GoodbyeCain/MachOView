@@ -107,7 +107,6 @@ struct MVNodeSaver;
 - (void)                setAttributesForRowIndex:(NSUInteger)index :(NSString *)firstArg, ... NS_REQUIRES_NIL_TERMINATION;
 - (void)                setAttributesFromRowIndex:(NSUInteger)index :(NSString *)firstArg, ... NS_REQUIRES_NIL_TERMINATION;
 
-- (float)compareWithTable:(MVTable *) table;
 
 @end
 
@@ -145,7 +144,6 @@ struct MVNodeSaver;
 - (void)                saveToFile:(FILE *)pFile;
 - (NSArray <MVNode *> *)allChildren;
 - (NSArray <MVNode *> *)currChildren;
-- (float)compareWithNode:(MVNode *) other;
 
 @end
 
