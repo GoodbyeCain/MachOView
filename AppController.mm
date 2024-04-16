@@ -16,10 +16,15 @@
 #import <mach-o/loader.h>
 #import "NSAlert+Helper.h"
 #import "CompareWindowController.h"
+#import "MachOLayout.h"
 
 // counters for statistics
 int64_t nrow_total;  // number of rows (loaded and empty)
 int64_t nrow_loaded; // number of loaded rows
+
+@interface MVAppController ()
+@property (nonatomic, strong) NSMutableArray *parseFinishedPaths;
+@end
 
 //============================================================================
 @implementation MVAppController
@@ -196,9 +201,18 @@ int64_t nrow_loaded; // number of loaded rows
 - (IBAction)compareDocument:(id)sender
 {
     NSArray *allDocuments = [[NSDocumentController sharedDocumentController] documents]; // 获取所有打开的文档
-//    if(allDocuments.count != 2) {
-//        [NSAlert runModalWithMessage:@"Please select two file for compare"];
-//    }
+    if(allDocuments.count != 2) {
+        [NSAlert runModalWithMessage:@"Please select two file for compare"];
+        return;
+    }
+    
+    for (MVDocument *document in allDocuments) {
+        NSString *docPath = document.fileURL.path;
+        if(![self.parseFinishedPaths containsObject:docPath]) {
+            [NSAlert runModalWithMessage:[NSString stringWithFormat:@"Please wait %@ parse finish", docPath]];
+            return;
+        }
+    }
     
     compareController = [[CompareWindowController alloc] init];
     compareController.leftDocument = allDocuments.firstObject;
@@ -294,6 +308,15 @@ int64_t nrow_loaded; // number of loaded rows
       [NSApp presentError:error];
     }
   }
+    
+    [[NSNotificationCenter defaultCenter]
+        addObserverForName:kCodeParseFinishNotification
+                    object:nil
+                     queue:NSOperationQueue.mainQueue
+                usingBlock:^(NSNotification * _Nonnull notification) {
+        NSString *path = notification.userInfo[@"path"];
+        [self.parseFinishedPaths addObject:path];
+    }];
 }
 
 //----------------------------------------------------------------------------
@@ -370,6 +393,13 @@ int64_t nrow_loaded; // number of loaded rows
         preferenceController = [[MVPreferenceController alloc] init];
     }
     [preferenceController showWindow:self];
+}
+
+- (NSMutableArray *)parseFinishedPaths {
+    if(!_parseFinishedPaths) {
+        _parseFinishedPaths = [NSMutableArray arrayWithCapacity:2];
+    }
+    return _parseFinishedPaths;
 }
 
 @end

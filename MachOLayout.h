@@ -32,6 +32,8 @@ typedef std::map<uint64_t,std::pair<uint64_t,uint64_t> >        SegmentInfoMap; 
 typedef std::map<uint64_t,std::pair<uint64_t,NSDictionary *> >  SectionInfoMap;     // address --> <fileOffset,sectionUserInfo>
 typedef std::map<uint64_t,uint64_t>                             ExceptionFrameMap;  // LSDA_addr  --> PCBegin_addr
 
+extern NSString *const kCodeParseFinishNotification;
+
 @interface MachOLayout : MVLayout 
 {
   uint64_t                entryPoint;       // instruction pointer in thread command

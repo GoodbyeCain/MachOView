@@ -23,6 +23,8 @@
 
 using namespace std;
 
+NSString *const kCodeParseFinishNotification = @"kCodeParseFinishNotification";
+
 //============================================================================
 @implementation MachOLayout
 @synthesize symbolList = symbolList;
@@ -2538,6 +2540,9 @@ struct CompareSectionByName
       if ([self is64bit] == NO) [self processCodeSections]; else [self processCodeSections64];
     }
     NSLog(@"%@: Code sections finished parsing.", self);
+      [[NSNotificationCenter defaultCenter] postNotificationName:kCodeParseFinishNotification
+                                                          object:nil
+                                                        userInfo:@{@"path": self.dataController.fileName}];
   }];
   
   // setup dependencies
