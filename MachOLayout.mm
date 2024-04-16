@@ -1246,6 +1246,13 @@ struct CompareSectionByName
                           location:section_64->offset + imageOffset
                             length:section_64->size
                             stride:16]; break;
+        case S_REGULAR:
+          if(strcmp(section_64->sectname, "__ustring") == 0) {
+              [self createUStringsNode:sectionNode
+                               caption:(lastNodeCaption = @"U String Literals")
+                              location:section_64->offset + imageOffset
+                                length:section_64->size]; break;
+          }
       }
     }
     @catch(NSException * exception)

@@ -47,12 +47,14 @@ struct MVNodeSaver;
   NSString *            dataStr;
   NSString *            descriptionStr;
   NSString *            valueStr;
+  BOOL                  uString;
 }
 
 @property (nonatomic)   NSString * offsetStr;
 @property (nonatomic)   NSString * dataStr;
 @property (nonatomic)   NSString * descriptionStr;
 @property (nonatomic)   NSString * valueStr;
+@property (nonatomic)   BOOL uString;
 
 +(MVColumns *) columnsWithData:(NSString *)col0 :(NSString *)col1 :(NSString *)col2 :(NSString *)col3;
 
@@ -99,7 +101,9 @@ struct MVNodeSaver;
 
 - (void)                popRow;
 - (void)                appendRow:(id)col0 :(id)col1 :(id)col2 :(id)col3;
+- (void)                appendUStringRow:(id)col0 :(id)col1 :(id)col2 :(id)col3;
 - (void)                insertRowWithOffset:(uint64_t)offset :(id)col0 :(id)col1 :(id)col2 :(id)col3;
+- (void)                insertUStringRowWithOffset:(uint64_t)offset :(id)col0 :(id)col1 :(id)col2 :(id)col3;
 - (void)                updateCellContentTo:(id)object atRow:(NSUInteger)rowIndex andCol:(NSUInteger)colIndex;
 
 - (NSUInteger)          rowCount;

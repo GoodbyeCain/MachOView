@@ -125,6 +125,38 @@ using namespace std;
 }
 
 //-----------------------------------------------------------------------------
+-(MVNode *)createUStringsNode:(MVNode *)parent
+                      caption:(NSString *)caption
+                     location:(uint64_t)location
+                       length:(uint64_t)length
+{
+  MVNodeSaver nodeSaver;
+  MVNode * node = [parent insertChildWithDetails:caption location:location length:length saver:nodeSaver];
+  
+  NSRange range = NSMakeRange(location,0);
+  NSString * lastReadHex;
+
+  while (NSMaxRange(range) < location + length)
+  {
+    NSString * symbolName = [dataController read_ustring:range lastReadHex:&lastReadHex];
+    
+    [node.details appendUStringRow:[NSString stringWithFormat:@"%.8lX", range.location]
+                                  :lastReadHex
+                                  :[NSString stringWithFormat:@"UString (length:%lu)", [symbolName lengthOfBytesUsingEncoding:NSUTF16LittleEndianStringEncoding]]
+                                  :symbolName];
+    
+    [node.details setAttributes:MVMetaDataAttributeName,symbolName,nil];
+    
+      // fill in lookup table with C Strings
+      uint64_t rva = [self fileOffsetToRVA:range.location];
+      [symbolNames setObject:[NSString stringWithFormat:@"0x%qX:\"%@\"", rva, symbolName]
+                      forKey:[NSNumber numberWithUnsignedLongLong:rva]];
+  }
+  
+  return node;
+}
+
+//-----------------------------------------------------------------------------
 -(MVNode *)createLiteralsNode:(MVNode *)parent
                       caption:(NSString *)caption
                      location:(uint64_t)location

@@ -493,9 +493,31 @@ NSString * const MVStatusTaskTerminated           = @"MVStatusTaskTerminated";
 }
 
 //----------------------------------------------------------------------------
+- (void)insertUStringRowWithOffset:(uint64_t)offset :(id)col0 :(id)col1 :(id)col2 :(id)col3
+{
+  MVRow * row = [[MVRow alloc] init];
+  MVColumns *col = [MVColumns columnsWithData:col0:col1:col2:col3];
+  col.uString = YES;
+  row.columns = col;
+  row.offset = offset;
+  
+  [tableLock lock];
+  [rows addObject:row];
+  [tableLock unlock];
+  
+  [archiver addObjectToSave:row];
+}
+
+//----------------------------------------------------------------------------
 - (void)appendRow:(id)col0 :(id)col1 :(id)col2 :(id)col3
 {
   [self insertRowWithOffset:0 :col0:col1:col2:col3];
+}
+
+//----------------------------------------------------------------------------
+- (void)appendUStringRow:(id)col0 :(id)col1 :(id)col2 :(id)col3
+{
+  [self insertUStringRowWithOffset:0 :col0:col1:col2:col3];
 }
 
 //----------------------------------------------------------------------------
@@ -1350,6 +1372,8 @@ NSString * const MVStatusTaskTerminated           = @"MVStatusTaskTerminated";
 //-----------------------------------------------------------------------------
 -(void) doSave
 {
+//FIX ME: Add UString so save to cString is not avaiable
+    return;
   for (;;)
   {
     if ([objectsToSave count] > 0)

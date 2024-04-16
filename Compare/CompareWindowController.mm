@@ -78,33 +78,13 @@
     }
     
     NSLog(@"Summary compare result");
+    NSLog(@"Left file URL =>%@", _leftDocument.fileURL.absoluteURL);
+    NSLog(@"Right file URL =>%@", _rightDocument.fileURL.absoluteURL);
     for (CompareModel *result in resultList) {
         NSLog(@"\t%@", result);
     }
     
-//    for (NSUInteger i = 0; i < leftNodes.count; i ++) {
-//        MVNode *leftNode = leftNodes[i];
-//        NSMutableArray <MVNode *>*matchedNodes = [NSMutableArray arrayWithCapacity:2];
-//        for (MVNode *rightNode in rightNodes) {
-//            if([leftNode.caption isEqualToString:rightNode.caption]) {
-//                [matchedNodes addObject:rightNode];
-//            }
-//        }
-//        
-//        if(matchedNodes.count == 1) {
-//            MVNode *matchedRight = matchedNodes.firstObject;
-//            [leftNode openDetails];
-//            [matchedRight openDetails];
-//            float similar = [leftNode.details compareWithTable:matchedNodes.firstObject.details];
-//            leftNode.similar = similar;
-//            leftNode.similarInfo = [NSString stringWithFormat:@"%.1f", similar];
-//        } else {
-//            leftNode.similar = 0;
-//            leftNode.similarInfo = @"Node caption more than one";
-//        }
-//        
-//        NSLog(@"Compare percent: %f", (float)(i + 1) / leftNodes.count);
-//    }
+    
     typeof(self) __weak weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^
     {

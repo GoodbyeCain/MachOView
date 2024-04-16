@@ -13,7 +13,8 @@
 - (BOOL)needCompared
 {
     static NSArray <NSString *>* needComparedCaptionNames = @[
-        @"C String Literals"
+        @"C String Literals",
+        @"U String Literals"
     ];
     if([needComparedCaptionNames containsObject:self.caption])
     {
@@ -37,7 +38,7 @@
         if([leftChild needCompared]) {
             MVTable *leftDetail = [leftChild getDetails];
             MVTable *rightDetail = [rightChild getDetails];
-            [leftDetail compareCStringLiterals:rightDetail resultModel:result];
+            [leftDetail compareStringLiterals:rightDetail resultModel:result];
             NSLog(@"Compare %@ %@", self.caption, leftChild.caption);
             NSLog(@"\t left count:%@ right count: %@ similar: %@", @(leftDetail.rowCount), @(rightDetail.rowCount), @(result.similar));
         }

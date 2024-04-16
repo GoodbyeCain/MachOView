@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MVTable (Compare)
 
-- (void)compareCStringLiterals:(MVTable *) otherTable resultModel:(CompareModel *) model;
+- (void)compareStringLiterals:(MVTable *) otherTable resultModel:(CompareModel *) model;
 
 @end
 

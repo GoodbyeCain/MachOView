@@ -152,6 +152,29 @@
 }
 
 //-----------------------------------------------------------------------------
+- (NSString *)read_ustring:(NSRange &)range lastReadHex:(NSString **)lastReadHex
+{
+  range.location = NSMaxRange(range);
+  uint8_t *bytes = ((uint8_t *)[fileData bytes] + range.location);
+  NSUInteger length = 0;
+  while (1) {
+      if(bytes[length] == 0  && bytes[length + 1] == 0) {
+          break;
+      }
+      length += 2;
+  }
+  NSString *str = [[NSString alloc] initWithBytes:bytes length:length encoding:NSUTF16LittleEndianStringEncoding];
+  range.length = [str lengthOfBytesUsingEncoding:NSUTF16LittleEndianStringEncoding] + 2;
+  if(range.length % 2 != 0)
+  {
+      range.length -= 1;
+  }
+  if (lastReadHex) *lastReadHex = [self getHexStr:range];
+  NSLog(@"%@", str);
+  return [self replaceEscapeCharsInString:str];
+}
+
+//-----------------------------------------------------------------------------
 - (NSString *)read_string:(NSRange &)range fixlen:(NSUInteger)len lastReadHex:(NSString **)lastReadHex
 {
   range = NSMakeRange(NSMaxRange(range),len);

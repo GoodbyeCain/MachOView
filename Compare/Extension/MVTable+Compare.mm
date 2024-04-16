@@ -11,7 +11,7 @@
 @implementation MVTable (Compare)
 
 
-- (void)compareCStringLiterals:(MVTable *) otherTable resultModel:(CompareModel *) model
+- (void)compareStringLiterals:(MVTable *) otherTable resultModel:(CompareModel *) model
 {
     NSMutableSet *selfLiterals = [self valueStrMutableSet];
     

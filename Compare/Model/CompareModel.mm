@@ -27,7 +27,7 @@
     if(_lNode.allChildren.count == 1 && _rNode.allChildren.count == 1) 
     {
         MVNode *child = _lNode.allChildren[0];
-        return [NSString stringWithFormat:@"%@ %@ first intersection percent: %.2f second intersection percent %.2f",
+        return [NSString stringWithFormat:@"%@ %@ left intersection percent: %.2f right intersection percent %.2f",
                 _lNode.caption,
                 child.caption,
                 _lNode.similar,
