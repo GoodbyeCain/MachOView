@@ -11,6 +11,7 @@
 #import "DataController.h"
 #import "MVNode+Compare.h"
 #import "CompareModel.h"
+#import "MachOLayout+Compare.h"
 
 @interface CompareWindowController ()
 @property (nonatomic, strong) CompareDataSource *leftDataSource;
@@ -84,6 +85,8 @@
         NSLog(@"\t%@", result);
     }
     
+    MachOLayout *lLayout = _leftDocument.dataController.layouts.firstObject;
+    [lLayout compareWithLayout:_rightDocument.dataController.layouts.firstObject];
     
     typeof(self) __weak weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^

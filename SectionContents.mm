@@ -54,6 +54,7 @@ using namespace std;
     
     [symbolNames setObject:symbolName 
                     forKey:[NSNumber numberWithUnsignedLong:[self fileOffsetToRVA:range.location]]];
+    [symbolList addObject:symbolName];
   }
   
   return node;
@@ -119,6 +120,7 @@ using namespace std;
       uint64_t rva = [self fileOffsetToRVA:range.location];
       [symbolNames setObject:[NSString stringWithFormat:@"0x%qX:\"%@\"", rva, symbolName]
                       forKey:[NSNumber numberWithUnsignedLongLong:rva]];
+      [symbolList addObject:symbolName];
   }
   
   return node;
@@ -151,6 +153,7 @@ using namespace std;
       uint64_t rva = [self fileOffsetToRVA:range.location];
       [symbolNames setObject:[NSString stringWithFormat:@"0x%qX:\"%@\"", rva, symbolName]
                       forKey:[NSNumber numberWithUnsignedLongLong:rva]];
+      [symbolList addObject:symbolName];
   }
   
   return node;
@@ -209,6 +212,7 @@ using namespace std;
       uint64_t rva = [self fileOffsetToRVA:range.location];
       [symbolNames setObject:[NSString stringWithFormat:@"0x%qX:%@f", rva, literalStr]
                       forKey:[NSNumber numberWithUnsignedLongLong:rva]];
+      [symbolList addObject:literalStr];
   }
   return node;
   

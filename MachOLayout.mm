@@ -25,6 +25,7 @@ using namespace std;
 
 //============================================================================
 @implementation MachOLayout
+@synthesize symbolList = symbolList;
 
 //-----------------------------------------------------------------------------
 - (instancetype)initWithDataController:(MVDataController *)dc rootNode:(MVNode *)node
@@ -32,6 +33,7 @@ using namespace std;
   if (self = [super initWithDataController:dc rootNode:node])
   {
     symbolNames = [[NSMutableDictionary alloc] init];
+    symbolList = [NSMutableArray arrayWithCapacity:100000];
   }
   return self;
 }

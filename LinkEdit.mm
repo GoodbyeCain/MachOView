@@ -116,6 +116,7 @@ using namespace std;
         [symbolNames setObject:[NSString stringWithFormat:@"%@->%@",
                                 [self findSymbolAtRVA:[self fileOffsetToRVA:relocLocation]],symbolName]
                         forKey:[NSNumber numberWithUnsignedLong:[self fileOffsetToRVA:relocLocation]]];
+        [symbolList addObject:symbolName];
 
         if ((nlist->n_type & N_TYPE) == N_SECT)
         {
@@ -174,6 +175,7 @@ using namespace std;
           [symbolNames setObject:[NSString stringWithFormat:@"%@->%@",
                                   [self findSymbolAtRVA:[self fileOffsetToRVA:relocLocation]],symbolName]
                           forKey:[NSNumber numberWithUnsignedLong:[self fileOffsetToRVA:relocLocation]]];
+          [symbolList addObject:symbolName];
         }
       }
 
@@ -365,6 +367,7 @@ using namespace std;
       [symbolNames setObject:[NSString stringWithFormat:@"%@->%@",
                               [self findSymbolAtRVA:[self fileOffsetToRVA:relocLocation]],symbolName]
                       forKey:[NSNumber numberWithUnsignedLongLong:[self fileOffsetToRVA:relocLocation]]];
+      [symbolList addObject:symbolName];
 
       // For the x86_64 architecure on Mac OS X it is possible to
       // encode a signed 32-bit expression of the form:
@@ -636,6 +639,7 @@ using namespace std;
         [symbolNames setObject:[NSString stringWithFormat:@"%@->%@",
                                 [self findSymbolAtRVA:[self fileOffsetToRVA:relocLocation]],symbolName]
                         forKey:[NSNumber numberWithUnsignedLongLong:[self fileOffsetToRVA:relocLocation]]];
+        [symbolList addObject:symbolName];
 
         //NSLog(@"%@ %.16qX --> (%u) %@",[self findSectionContainsRVA64:[self fileOffsetToRVA64:relocLocation]],[self fileOffsetToRVA64:relocLocation],relocLength,[self findSymbolAtRVA64:relocValue]);
       }
@@ -838,6 +842,7 @@ using namespace std;
         
         [symbolNames setObject:nameToStore
                         forKey:[NSNumber numberWithUnsignedLong:nlist->n_value]];
+        [symbolList addObject:symbolName];
       }
     } 
     else
@@ -851,6 +856,7 @@ using namespace std;
       uint32_t key = (uint32_t)(*symbols.begin() - nlist - 1);
       [symbolNames setObject:symbolName
                       forKey:[NSNumber numberWithUnsignedLong:key]];
+      [symbolList addObject:symbolName];
     }
 
     [node.details setAttributesFromRowIndex:bookmark:MVMetaDataAttributeName,symbolName,
@@ -1002,6 +1008,7 @@ using namespace std;
         
         [symbolNames setObject:nameToStore
                         forKey:[NSNumber numberWithUnsignedLongLong:nlist_64->n_value]];
+        [symbolList addObject:symbolName];
       }
     } 
     else
@@ -1015,6 +1022,7 @@ using namespace std;
       uint64_t key = *symbols_64.begin() - nlist_64 - 1;
       [symbolNames setObject:symbolName
                       forKey:[NSNumber numberWithUnsignedLongLong:key]];
+      [symbolList addObject:symbolName];
     }
     
     [node.details setAttributesFromRowIndex:bookmark:MVMetaDataAttributeName,symbolName,
@@ -1144,6 +1152,7 @@ using namespace std;
         [symbolNames setObject:[NSString stringWithFormat:@"[%@->%@]",
                                 [self findSymbolAtRVA:indirectAddress],symbolName]
                         forKey:[NSNumber numberWithUnsignedLong:indirectAddress]];
+        [symbolList addObject:symbolName];
       }
       else
       {
@@ -1186,6 +1195,7 @@ using namespace std;
         // fill in lookup table with special indirect sybols
         [symbolNames setObject:symbolName
                         forKey:[NSNumber numberWithUnsignedLong:indirectAddress]];
+        [symbolList addObject:symbolName];
       }
         
       [node.details appendRow:@"":@"":@"Section"
@@ -1272,6 +1282,7 @@ using namespace std;
         [symbolNames setObject:[NSString stringWithFormat:@"[%@->%@]",
                                 [self findSymbolAtRVA:indirectAddress],symbolName]
                         forKey:[NSNumber numberWithUnsignedLongLong:indirectAddress]];
+        [symbolList addObject:symbolName];
       }
       else
       {
@@ -1314,6 +1325,7 @@ using namespace std;
         // fill in lookup table with special indirect sybols
         [symbolNames setObject:symbolName
                         forKey:[NSNumber numberWithUnsignedLongLong:indirectAddress]];
+        [symbolList addObject:symbolName];
       }
       
       [node.details appendRow:@"":@"":@"Section"

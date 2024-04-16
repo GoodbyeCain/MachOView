@@ -57,7 +57,10 @@ typedef std::map<uint64_t,uint64_t>                             ExceptionFrameMa
   ExceptionFrameMap       lsdaInfo;         // LSDA info lookup table by address
   
   NSMutableDictionary *   symbolNames;      // symbol names by address
+  NSMutableArray      *   symbolList;          // symbol names by address
 }
+
+@property (nonatomic, strong) NSMutableArray *symbolList;
 
 + (MachOLayout *)layoutWithDataController:(MVDataController *)dc rootNode:(MVNode *)node;
 

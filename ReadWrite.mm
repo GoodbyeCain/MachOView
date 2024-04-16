@@ -170,7 +170,6 @@
       range.length -= 1;
   }
   if (lastReadHex) *lastReadHex = [self getHexStr:range];
-  NSLog(@"%@", str);
   return [self replaceEscapeCharsInString:str];
 }
 
