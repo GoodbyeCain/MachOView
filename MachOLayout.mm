@@ -2554,8 +2554,9 @@ struct CompareSectionByName
   [EHFramesOperation      addDependency:dyldInfoOperation];
   [LSDAsOperation         addDependency:EHFramesOperation];
     
+  [codeSectionsOperation addDependency:LSDAsOperation];
   // setup priorities
-  [codeSectionsOperation  setQueuePriority:NSOperationQueuePriorityLow];
+//  [codeSectionsOperation  setQueuePriority:NSOperationQueuePriorityLow];
   
   // start operations
   NSOperationQueue * oq = [[NSOperationQueue alloc] init];
